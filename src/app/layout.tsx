@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { UserfrontProvider } from "@userfront/next/client";
+import { ReactNode } from "react";
+import Header from "@luz-catalogue/app/_components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,14 +23,21 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <UserfrontProvider
+          tenantId={process.env.NEXT_PUBLIC_USERFRONT_TENANT_ID}
+          loginRedirect="/admin-dashboard"
+          requireAuth
+        >
+          <Header />
+          {children}
+        </UserfrontProvider>
       </body>
     </html>
   );
