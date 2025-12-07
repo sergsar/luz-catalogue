@@ -1,8 +1,8 @@
 import {
   collections,
   connectToDatabase,
-} from "@luz-catalogue/app/services/mongodb-service";
-import parseError from "@luz-catalogue/app/utils/parseError";
+} from "@luz-catalogue/services/mongodb-service";
+import parseError from "@luz-catalogue/utils/parseError";
 
 export const GET = async () => {
   try {

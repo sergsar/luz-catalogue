@@ -1,5 +1,5 @@
 import { Collection } from "mongodb";
-import client from "@luz-catalogue/app/services/mongo-client";
+import client from "@luz-catalogue/services/mongo-client";
 
 export const collections: { catalogue?: Collection } = {};
 
