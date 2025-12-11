@@ -1,12 +1,9 @@
-import {
-  collections,
-  connectToDatabase,
-} from "@luz-catalogue/services/mongodb-service";
+import { connectToDatabase } from "@luz-catalogue/services/mongodb-service";
 import parseError from "@luz-catalogue/utils/parseError";
 
 export const GET = async () => {
   try {
-    await connectToDatabase();
+    const collections = await connectToDatabase();
 
     const query = { code: "00000" };
     const catalogue = await collections.catalogue?.findOne(query);

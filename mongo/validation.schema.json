@@ -1,0 +1,47 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "code",
+      "description",
+      "price",
+      "stock",
+      "document_key",
+      "updated_at"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "code": {
+        "bsonType": "string",
+        "description": "code must be a string"
+      },
+      "description": {
+        "bsonType": "string",
+        "description": "description must be a string"
+      },
+      "price": {
+        "bsonType": "decimal",
+        "description": "price must be a decimal"
+      },
+      "stock": {
+        "bsonType": "int",
+        "description": "stock must be an integer"
+      },
+      "created_at": {
+        "bsonType": "date",
+        "description": "created_at must be a date"
+      },
+      "updated_at": {
+        "bsonType": "date",
+        "description": "updated_at must be a date"
+      },
+      "document_key": {
+        "bsonType": "string",
+        "description": "document_key must be a string"
+      }
+    }
+  }
+}

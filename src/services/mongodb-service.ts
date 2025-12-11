@@ -1,7 +1,7 @@
 import { Collection } from "mongodb";
 import client from "@luz-catalogue/services/mongo-client";
 
-export const collections: { catalogue?: Collection } = {};
+const collections: { catalogue?: Collection } = {};
 
 export const connectToDatabase = async () => {
   try {
@@ -9,7 +9,7 @@ export const connectToDatabase = async () => {
 
     await client.connect();
 
-    const db = client.db("vaelza_test");
+    const db = client.db("vaelza");
 
     const catalogueCollection = db.collection("catalogue");
 
@@ -21,4 +21,6 @@ export const connectToDatabase = async () => {
   } catch (e) {
     console.error(e);
   }
+
+  return collections;
 };
