@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 
 export class Catalogue {
   constructor(
-    public id: ObjectId,
+    public _id: ObjectId,
     public code: string,
     public description: string,
     public price: string,
@@ -16,6 +16,6 @@ export class Catalogue {
 
 export type CataloguePayload = Omit<
   Catalogue,
-  "id" | "created_at" | "updated_at" | "document_key"
+  "_id" | "created_at" | "updated_at" | "document_key"
 >;
 export type CatalogueKeys = keyof CataloguePayload;

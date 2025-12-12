@@ -1,12 +1,14 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(['/admin(.*)', '/api(.*)'])
+const isProtectedRoute = createRouteMatcher(["/admin(.*)", "/api(.*)"]);
+const isUnprotectedApi = createRouteMatcher(["/api/catalogue/search"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
+  if (isProtectedRoute(req) && !isUnprotectedApi(req)) {
+    // return 404 when api route?
     await auth.protect();
   }
-})
+});
 
 export const config = {
   matcher: [

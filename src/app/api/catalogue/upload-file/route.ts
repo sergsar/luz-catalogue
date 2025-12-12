@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 import parseError from "@luz-catalogue/utils/parseError";
-import parseCatalogueFile from "@luz-catalogue/app/api/catalogue/upload-file/parseCatalogueFile";
-import { validateCatalogueItems } from "@luz-catalogue/app/api/catalogue/upload-file/catalogueSchema";
-import writeCatalogueToDatabase from "@luz-catalogue/app/api/catalogue/upload-file/writeCatalogueToDatabase";
+import parseCatalogueFile from "@luz-catalogue/app/api/catalogue/upload-file/utils/parseCatalogueFile";
+import { validateCatalogueItems } from "@luz-catalogue/app/api/catalogue/upload-file/utils/catalogueSchema";
+import writeCatalogueToDatabase from "@luz-catalogue/app/api/catalogue/upload-file/utils/writeCatalogueToDatabase";
 import { UploadFileResponse } from "@luz-catalogue/app/api/catalogue/upload-file/types";
 
 export const POST = async function (req: NextRequest) {
