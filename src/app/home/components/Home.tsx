@@ -2,10 +2,7 @@
 
 import { Box } from "@mui/material";
 import AutocompleteSearch from "@luz-catalogue/app/home/components/AutocompleteSearch";
-import {
-  CartItem,
-  CartTable,
-} from "@luz-catalogue/app/home/components/CartTable";
+import { CartTable } from "@luz-catalogue/app/home/components/CartTable";
 import Button from "node_modules/@mui/material/Button";
 import { useCallback, useState } from "react";
 import { SearchItem } from "@luz-catalogue/app/api/catalogue/search/types";
@@ -13,6 +10,8 @@ import {
   Message,
   MessageBar,
 } from "@luz-catalogue/app/home/components/MessageBar";
+import exportToFile from "@luz-catalogue/app/home/utils/exportToFile";
+import { CartItem } from "@luz-catalogue/app/home/types";
 
 const Home = () => {
   const [selected, setSelected] = useState<SearchItem | null>();
@@ -59,6 +58,13 @@ const Home = () => {
     [items],
   );
 
+  const handleExport = useCallback(() => {
+    if (!items.length) {
+      return;
+    }
+    exportToFile(items);
+  }, [items]);
+
   return (
     <Box component="main">
       <Box display="flex" flexDirection="column" padding={4} gap={2}>
@@ -73,6 +79,9 @@ const Home = () => {
           onQuantityChange={handleQuantity}
           onRemove={handleRemove}
         />
+        <Button disabled={!items.length} onClick={handleExport}>
+          Export
+        </Button>
       </Box>
       <MessageBar onClose={() => setMessage(undefined)} message={message} />
     </Box>
