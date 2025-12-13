@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 const SUPPORTED_LOCALES = ["en", "es"] as const;
 
@@ -7,6 +7,12 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 const DEFAULT_LOCALE: Locale = "en";
 
 export const getLocale = async () => {
+  const nextCookies = await cookies();
+  const locale = nextCookies.get("locale");
+  if (locale && SUPPORTED_LOCALES.includes(locale.value as Locale)) {
+    return locale.value as Locale;
+  }
+
   const nextHeaders = await headers();
   const header = nextHeaders.get("accept-language");
 

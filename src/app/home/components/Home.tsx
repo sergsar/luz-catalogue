@@ -76,7 +76,7 @@ const Home = () => {
 
   return (
     <Box component="main">
-      <Box display="flex" flexDirection="column" padding={4} gap={2}>
+      <Box display="flex" flexDirection="column" gap={2} padding={2}>
         <Box display="flex" flexDirection="row" gap={2}>
           <AutocompleteSearch onSelect={setSelected} />
           <Button disabled={!selected} onClick={handleAdd}>

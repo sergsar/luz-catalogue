@@ -7,6 +7,9 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import theme from "@luz-catalogue/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { NextIntlClientProvider } from "next-intl";
+import Header from "@luz-catalogue/components/Header";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +39,11 @@ export default function RootLayout({
         >
           <NextIntlClientProvider>
             <AppRouterCacheProvider>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Header />
+                {children}
+              </ThemeProvider>
             </AppRouterCacheProvider>
           </NextIntlClientProvider>
         </body>
