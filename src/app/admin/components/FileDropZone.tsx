@@ -1,5 +1,6 @@
 import { Box, styled, Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onDrop: (file: File[]) => void;
@@ -24,6 +25,7 @@ const DropZoneStyle = styled("div")(({ theme }) => ({
 }));
 
 const FileDropZone = ({ onDrop }: Props) => {
+  const t = useTranslations("admin.upload");
   const {
     getRootProps,
     getInputProps,
@@ -59,11 +61,11 @@ const FileDropZone = ({ onDrop }: Props) => {
         aria-label="upload dropzone area"
       >
         <Typography variant="body1" align="center">
-          Click or drag to upload the file
+          {t("click_drag_to_upload_file")}
         </Typography>
         {Object.keys(mimeTypes).length > 0 && (
           <Typography variant="body2" align="center">
-            Supported file types: xls
+            {t("supported_file_types", { types: "xls" })}
           </Typography>
         )}
       </Box>

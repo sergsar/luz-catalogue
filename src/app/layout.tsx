@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import theme from "@luz-catalogue/theme";
 import { ThemeProvider } from "@mui/material/styles";
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
-          </AppRouterCacheProvider>
+          <NextIntlClientProvider>
+            <AppRouterCacheProvider>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </AppRouterCacheProvider>
+          </NextIntlClientProvider>
         </body>
       </html>
     </ClerkProvider>

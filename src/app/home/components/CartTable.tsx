@@ -15,6 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { CartItem } from "@luz-catalogue/app/home/types";
+import { useTranslations } from "next-intl";
 
 type Props = {
   items: CartItem[];
@@ -23,25 +24,30 @@ type Props = {
 };
 
 export const CartTable = ({ items, onQuantityChange, onRemove }: Props) => {
+  const t = useTranslations("home.table");
+
   return (
     <TableContainer component={Paper} elevation={1}>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>
-              <strong>Code</strong>
+              <strong>{t("code")}</strong>
             </TableCell>
             <TableCell>
-              <strong>Description</strong>
+              <strong>{t("description")}</strong>
             </TableCell>
             <TableCell align="center">
-              <strong>Available</strong>
+              <strong>{t("price")}</strong>
             </TableCell>
             <TableCell align="center">
-              <strong>Quantity</strong>
+              <strong>{t("available")}</strong>
+            </TableCell>
+            <TableCell align="center">
+              <strong>{t("quantity")}</strong>
             </TableCell>
             <TableCell align="right">
-              <strong>Actions</strong>
+              <strong>{t("actions")}</strong>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -51,7 +57,7 @@ export const CartTable = ({ items, onQuantityChange, onRemove }: Props) => {
             <TableRow>
               <TableCell colSpan={4} align="center">
                 <Typography variant="body2" color="text.secondary">
-                  List is empty
+                  {t("list_is_empty")}
                 </Typography>
               </TableCell>
             </TableRow>
@@ -64,6 +70,8 @@ export const CartTable = ({ items, onQuantityChange, onRemove }: Props) => {
               <TableCell>
                 <Typography variant="body2">{item.description}</Typography>
               </TableCell>
+
+              <TableCell>{item.calcPrice}</TableCell>
 
               <TableCell>{item.stock}</TableCell>
 

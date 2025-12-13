@@ -1,0 +1,30 @@
+{
+  "home": {
+    "add_to_list": "Añadir a la lista",
+    "export": "Exportar",
+    "search": {
+      "search_an_article": "Buscar un artículo",
+      "no_items": "No hay artículos"
+    },
+    "table": {
+      "code": "Código",
+      "description": "Descripción",
+      "price": "Precio",
+      "available": "Disponible",
+      "quantity": "Cantidad",
+      "actions": "Acciones",
+      "list_is_empty": "La lista está vacía"
+    },
+    "message": {
+      "item_not_in_stock": "El artículo no está en stock",
+      "item_already_added": "El artículo ya ha sido añadido",
+      "item_quantity_is_limited_by": "La cantidad del artículo está limitada a {quantity}"
+    }
+  },
+  "admin": {
+    "upload": {
+      "click_drag_to_upload_file": "Haz clic o arrastra para subir el archivo",
+      "supported_file_types": "Tipos de archivo compatibles: {types}"
+    }
+  }
+}

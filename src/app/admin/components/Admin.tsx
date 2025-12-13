@@ -9,6 +9,9 @@ import { UploadFileResponse } from "@luz-catalogue/app/api/catalogue/upload-file
 import ErrorList from "@luz-catalogue/app/admin/components/ErrorList";
 import Typography from "node_modules/@mui/material/Typography";
 import WriteResult from "@luz-catalogue/app/admin/components/WriteResult";
+import HomeIcon from "@mui/icons-material/Home";
+import IconButton from "node_modules/@mui/material/IconButton";
+import Link from "next/link";
 
 const Admin = () => {
   const [uploading, setUploading] = useState(false);
@@ -33,7 +36,10 @@ const Admin = () => {
   return (
     <Box component="main">
       <Box display="flex" flexDirection="column" padding={4} gap={2}>
-        <Box display="flex" justifyContent="end">
+        <Box display="flex" justifyContent="space-between">
+          <IconButton component={Link} href="/" aria-label="Home">
+            <HomeIcon />
+          </IconButton>
           <SignedIn>
             <UserButton />
           </SignedIn>

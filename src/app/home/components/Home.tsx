@@ -10,28 +10,34 @@ import {
   Message,
   MessageBar,
 } from "@luz-catalogue/app/home/components/MessageBar";
-import exportToFile from "@luz-catalogue/app/home/utils/exportToFile";
 import { CartItem } from "@luz-catalogue/app/home/types";
+import { useTranslations } from "next-intl";
+import useFileExport from "@luz-catalogue/app/home/hooks/useFileExport";
 
 const Home = () => {
   const [selected, setSelected] = useState<SearchItem | null>();
   const [items, setItems] = useState<CartItem[]>([]);
   const [message, setMessage] = useState<Message>();
+  const { exportData } = useFileExport();
+  const t = useTranslations("home");
 
   const handleAdd = useCallback(() => {
     if (!selected) {
       return;
     }
     if (selected.stock <= 0) {
-      setMessage({ severity: "info", text: "The item isn't in stock" });
+      setMessage({ severity: "info", text: t("message.item_not_in_stock") });
       return;
     }
     if (items.find((item) => item.code === selected.code)) {
-      setMessage({ severity: "info", text: "The item is already added" });
+      setMessage({ severity: "info", text: t("message.item_already_added") });
       return;
     }
-    setItems((prev: CartItem[]) => [...prev, { ...selected, quantity: 1 }]);
-  }, [selected, items]);
+    setItems((prev: CartItem[]) => [
+      ...prev,
+      { ...selected, quantity: 1, calcPrice: selected.price },
+    ]);
+  }, [selected, items, t]);
 
   const handleRemove = useCallback((code: string) => {
     setItems((prev: CartItem[]) => prev.filter((item) => item.code !== code));
@@ -48,22 +54,25 @@ const Home = () => {
       if (delta && item.quantity + delta > item.stock) {
         setMessage({
           severity: "info",
-          text: `The item quantity is limited by ${item.stock}`,
+          text: t("message.item_quantity_is_limited_by", {
+            quantity: item.stock,
+          }),
         });
         return;
       }
       item.quantity += delta;
+      item.calcPrice = (parseFloat(item.price) * item.quantity).toFixed(2);
       setItems([...items]);
     },
-    [items],
+    [items, t],
   );
 
   const handleExport = useCallback(() => {
     if (!items.length) {
       return;
     }
-    exportToFile(items);
-  }, [items]);
+    exportData(items);
+  }, [items, exportData]);
 
   return (
     <Box component="main">
@@ -71,7 +80,7 @@ const Home = () => {
         <Box display="flex" flexDirection="row" gap={2}>
           <AutocompleteSearch onSelect={setSelected} />
           <Button disabled={!selected} onClick={handleAdd}>
-            Add to list
+            {t("add_to_list")}
           </Button>
         </Box>
         <CartTable
@@ -80,7 +89,7 @@ const Home = () => {
           onRemove={handleRemove}
         />
         <Button disabled={!items.length} onClick={handleExport}>
-          Export
+          {t("export")}
         </Button>
       </Box>
       <MessageBar onClose={() => setMessage(undefined)} message={message} />

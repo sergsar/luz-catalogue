@@ -1,0 +1,30 @@
+{
+  "home": {
+    "add_to_list": "Add to list",
+    "export": "Export",
+    "search": {
+      "search_an_article": "Search an article",
+      "no_items": "No items"
+    },
+    "table": {
+      "code": "Code",
+      "description": "Description",
+      "price": "Price",
+      "available": "Available",
+      "quantity": "Quantity",
+      "actions": "Actions",
+      "list_is_empty": "List is empty"
+    },
+    "message": {
+      "item_not_in_stock": "The item isn't in stock",
+      "item_already_added": "The item is already added",
+      "item_quantity_is_limited_by": "The item quantity is limited by {quantity}"
+    }
+  },
+  "admin": {
+    "upload": {
+      "click_drag_to_upload_file": "Click or drag to upload the file",
+      "supported_file_types": "Supported file types: {types}"
+    }
+  }
+}

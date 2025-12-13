@@ -31,6 +31,11 @@ export const GET = async (req: NextRequest) => {
             code: 1,
             description: 1,
             stock: 1,
+            price: {
+              $toString: {
+                $round: [{ $ifNull: [{ $toDouble: "$price" }, 0] }, 2],
+              },
+            },
           },
         },
       ])

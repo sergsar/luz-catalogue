@@ -14,6 +14,7 @@ import { debounce } from "@mui/material/utils";
 import { useEffect, useLayoutEffect, useState } from "react";
 import parseError from "@luz-catalogue/utils/parseError";
 import { SearchItem } from "@luz-catalogue/app/api/catalogue/search/types";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onSelect: (value: SearchItem | null) => void;
@@ -39,7 +40,7 @@ const search = debounce(
       callback(data.documents);
     } catch (err) {
       const message = parseError(err);
-      callback([{ code: "Error", description: message, stock: 0 }]);
+      callback([{ code: "Error", description: message, stock: 0, price: "" }]);
 
       throw err;
     }
@@ -53,6 +54,7 @@ const AutocompleteSearch = ({ onSelect }: Props) => {
   const [value, setValue] = useState<SearchItem | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState<readonly SearchItem[]>(emptyOptions);
+  const t = useTranslations("home");
 
   useEnhancedEffect(() => {
     if (inputValue === "") {
@@ -105,7 +107,7 @@ const AutocompleteSearch = ({ onSelect }: Props) => {
       includeInputInList
       filterSelectedOptions
       value={value}
-      noOptionsText="No items"
+      noOptionsText={t("search.no_items")}
       onChange={(event, newValue: SearchItem | null) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
@@ -115,7 +117,11 @@ const AutocompleteSearch = ({ onSelect }: Props) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Search an article" fullWidth />
+        <TextField
+          {...params}
+          label={t("search.search_an_article")}
+          fullWidth
+        />
       )}
       renderOption={(props, option) => {
         const { key, ...optionProps } = props;
